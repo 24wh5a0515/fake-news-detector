@@ -1,0 +1,243 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+header p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+/* Main */
+main {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Cards */
+.input-card,
+.result-card,
+.history-card,
+.loading-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.input-card h2,
+.result-card h2,
+.history-card h2 {
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+  color: #1a1a2e;
+}
+
+/* Textarea */
+textarea {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.3s;
+  outline: none;
+}
+textarea:focus {
+  border-color: #4361ee;
+}
+
+/* Character count */
+.char-count {
+  text-align: right;
+  font-size: 0.85rem;
+  color: #888;
+  margin: 8px 0 16px;
+}
+
+/* Check button */
+#checkBtn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #4361ee, #3a0ca3);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+#checkBtn:hover {
+  opacity: 0.9;
+}
+#checkBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Loading card */
+.loading-card {
+  display: none;
+  text-align: center;
+  padding: 40px;
+}
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f0f0f0;
+  border-top: 5px solid #4361ee;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Result card */
+.result-card {
+  display: none;
+}
+.result-badge {
+  text-align: center;
+  padding: 20px;
+  border-radius: 12px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.result-badge.fake {
+  background: #ffe5e5;
+  color: #d00000;
+}
+.result-badge.real {
+  background: #e5ffe5;
+  color: #008000;
+}
+.result-badge.uncertain {
+  background: #fff8e5;
+  color: #cc7700;
+}
+
+/* Result details */
+.result-details {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 20px;
+}
+.detail-item {
+  margin-bottom: 16px;
+}
+.detail-label {
+  font-weight: 600;
+  color: #555;
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.detail-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #4361ee;
+}
+.detail-reason {
+  color: #444;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Check again button */
+.check-again-btn {
+  width: 100%;
+  padding: 14px;
+  background: white;
+  color: #4361ee;
+  border: 2px solid #4361ee;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s;
+}
+.check-again-btn:hover {
+  background: #4361ee;
+  color: white;
+}
+
+/* History card */
+.history-item {
+  padding: 16px;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: box-shadow 0.3s;
+}
+.history-item:hover {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.history-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.history-badge.fake {
+  background: #ffe5e5;
+  color: #d00000;
+}
+.history-badge.real {
+  background: #e5ffe5;
+  color: #008000;
+}
+.history-date {
+  font-size: 0.8rem;
+  color: #888;
+}
+.history-text {
+  color: #444;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.history-confidence {
+  font-size: 0.85rem;
+  color: #4361ee;
+  font-weight: 600;
+}
+.no-history {
+  color: #888;
+  text-align: center;
+  padding: 20px;
+}

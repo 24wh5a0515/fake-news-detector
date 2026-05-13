@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Fake News Detector</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <h1>🔍 AI Fake News Detector</h1>
+      <p>Paste any news text below — AI will detect if it is Real or Fake</p>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main>
+
+    <!-- Input Section -->
+    <div class="input-card">
+      <h2>Enter News Text</h2>
+      <textarea
+        id="newsInput"
+        placeholder="Paste your news article or headline here..."
+        rows="6"
+      ></textarea>
+
+      <div class="char-count">
+        <span id="charCount">0</span> characters
+      </div>
+
+      <button id="checkBtn" onclick="checkNews()">
+        🔍 Check News
+      </button>
+    </div>
+
+    <!-- Loading Section (hidden by default) -->
+    <div class="loading-card" id="loadingCard">
+      <div class="spinner"></div>
+      <p>AI is analyzing your news...</p>
+      <small>This may take a few seconds</small>
+    </div>
+
+    <!-- Result Section (hidden by default) -->
+    <div class="result-card" id="resultCard">
+      <h2>Analysis Result</h2>
+
+      <div class="result-badge" id="resultBadge">
+        <!-- FAKE or REAL will show here -->
+      </div>
+
+      <div class="result-details">
+        <div class="detail-item">
+          <span class="detail-label">Confidence Score</span>
+          <span class="detail-value" id="confidenceScore"></span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Reason</span>
+          <p class="detail-reason" id="reason"></p>
+        </div>
+      </div>
+
+      <button class="check-again-btn" onclick="checkAgain()">
+        🔄 Check Another News
+      </button>
+    </div>
+
+    <!-- History Section -->
+    <div class="history-card">
+      <h2>Recent Checks</h2>
+      <div id="historyList">
+        <p class="no-history">No history yet</p>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
