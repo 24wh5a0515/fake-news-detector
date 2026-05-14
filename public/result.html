@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result — AI Fake News Detector</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <h1>🔍 AI Fake News Detector</h1>
+      <p>Paste any news text below — AI will detect if it is Real or Fake</p>
+    </div>
+  </header>
+
+  <!-- Result Page Content -->
+  <main>
+    <div class="result-page-card" id="resultPageCard">
+
+      <!-- Back Button -->
+      <button class="back-btn" onclick="goBack()">
+        ← Back to Home
+      </button>
+
+      <h2>Analysis Result</h2>
+
+      <!-- Big Result Badge -->
+      <div class="big-result-badge" id="bigResultBadge">
+      </div>
+
+      <!-- Details Box -->
+      <div class="details-box">
+
+        <div class="detail-row">
+          <div class="detail-icon">📊</div>
+          <div class="detail-content">
+            <span class="detail-title">Confidence Score</span>
+            <span class="detail-data" id="resultConfidence"></span>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-icon">📝</div>
+          <div class="detail-content">
+            <span class="detail-title">News Text</span>
+            <p class="detail-data" id="resultNewsText"></p>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-icon">🤖</div>
+          <div class="detail-content">
+            <span class="detail-title">AI Reason</span>
+            <p class="detail-data" id="resultReason"></p>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-icon">🕐</div>
+          <div class="detail-content">
+            <span class="detail-title">Checked At</span>
+            <span class="detail-data" id="resultDate"></span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Check Again Button -->
+      <button class="check-again-big-btn" onclick="goBack()">
+        🔄 Check Another News
+      </button>
+
+    </div>
+  </main>
+
+  <script src="result.js"></script>
+
+</body>
+</html>

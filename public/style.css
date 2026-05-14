@@ -241,3 +241,133 @@ textarea:focus {
   text-align: center;
   padding: 20px;
 }
+
+/* ===== RESULT PAGE STYLES ===== */
+
+.result-page-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #4361ee;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+.result-page-card h2 {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  color: #1a1a2e;
+}
+
+/* Big Result Badge */
+.big-result-badge {
+  border-radius: 16px;
+  padding: 40px 20px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+.fake-bg {
+  background: linear-gradient(135deg, #ff4444, #cc0000);
+  color: white;
+}
+.real-bg {
+  background: linear-gradient(135deg, #00c851, #007e33);
+  color: white;
+}
+.uncertain-bg {
+  background: linear-gradient(135deg, #ffbb33, #ff8800);
+  color: white;
+}
+
+.result-icon {
+  font-size: 4rem;
+  margin-bottom: 10px;
+}
+.result-text {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.result-sub {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Details Box */
+.details-box {
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 16px;
+}
+.detail-row:last-child {
+  border-bottom: none;
+}
+.detail-icon {
+  font-size: 1.5rem;
+  min-width: 40px;
+}
+.detail-content {
+  flex: 1;
+}
+.detail-title {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.detail-data {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Check Again Button */
+.check-again-big-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #4361ee, #3a0ca3);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+.check-again-big-btn:hover {
+  opacity: 0.9;
+}
+
+/* Body themes */
+body.fake-theme {
+  background-color: #fff5f5;
+}
+body.real-theme {
+  background-color: #f5fff5;
+}

@@ -62,34 +62,13 @@ async function checkNews() {
   }
 }
 
-// Show result on screen
+// Show result — Save to localStorage and go to result page
 function showResult(data) {
-  const resultCard = document.getElementById('resultCard');
-  const resultBadge = document.getElementById('resultBadge');
-  const confidenceScore = document.getElementById('confidenceScore');
-  const reason = document.getElementById('reason');
+  // Save result to localStorage
+  localStorage.setItem('newsResult', JSON.stringify(data));
 
-  // Set badge text and color
-  if (data.result === 'FAKE') {
-    resultBadge.textContent = '❌ FAKE NEWS';
-    resultBadge.className = 'result-badge fake';
-  } else if (data.result === 'REAL') {
-    resultBadge.textContent = '✅ REAL NEWS';
-    resultBadge.className = 'result-badge real';
-  } else {
-    resultBadge.textContent = '⚠️ UNCERTAIN';
-    resultBadge.className = 'result-badge uncertain';
-  }
-
-  // Set confidence and reason
-  confidenceScore.textContent = data.confidenceScore;
-  reason.textContent = data.reason;
-
-  // Show result card
-  resultCard.style.display = 'block';
-
-  // Scroll to result
-  resultCard.scrollIntoView({ behavior: 'smooth' });
+  // Go to result page
+  window.location.href = '/result.html';
 }
 
 // Load history from MongoDB
@@ -112,7 +91,8 @@ async function loadHistory() {
 
         // Format date
         const date = new Date(item.checkedAt);
-        const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        const formattedDate = date.toLocaleDateString()
+          + ' ' + date.toLocaleTimeString();
 
         div.innerHTML = `
           <div class="history-header">
