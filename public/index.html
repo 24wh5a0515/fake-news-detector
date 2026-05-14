@@ -19,9 +19,25 @@
   <!-- Main Container -->
   <main>
 
-    <!-- Input Section -->
-    <div class="input-card">
-      <h2>Enter News Text</h2>
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-icon">🤖</span>
+      <span class="stat-text">Powered by AI</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-icon">⚡</span>
+      <span class="stat-text">Results in seconds</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-icon">🛡️</span>
+      <span class="stat-text">Fight Misinformation</span>
+    </div>
+  </div>
+
+  <!-- Input Section -->
+  <div class="input-card">
+    <h2>Enter News Text</h2>
       <textarea
         id="newsInput"
         placeholder="Paste your news article or headline here..."
@@ -79,6 +95,15 @@
   </main>
 
   <script src="app.js"></script>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>🔍 AI Fake News Detector</p>
+      <p>Built with Node.js · Express · MongoDB · OpenRouter AI</p>
+      <p class="footer-note">This tool uses AI to analyze news. Always verify from trusted sources.</p>
+    </div>
+  </footer>
 
 </body>
 </html>

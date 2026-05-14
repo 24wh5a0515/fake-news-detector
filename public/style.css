@@ -371,3 +371,53 @@ body.fake-theme {
 body.real-theme {
   background-color: #f5fff5;
 }
+
+/* ===== FOOTER ===== */
+footer {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 40px;
+}
+.footer-content p {
+  margin-bottom: 8px;
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+.footer-content p:first-child {
+  font-size: 1.2rem;
+  font-weight: 600;
+  opacity: 1;
+}
+.footer-note {
+  font-size: 0.8rem !important;
+  opacity: 0.6 !important;
+  margin-top: 8px;
+}
+
+/* ===== STATS BAR ===== */
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  flex-wrap: wrap;
+}
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.stat-icon {
+  font-size: 1.5rem;
+}
+.stat-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1a2e;
+}
