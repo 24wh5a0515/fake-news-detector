@@ -20,6 +20,11 @@ mongoose.connect(process.env.MONGO_URI)
 const newsRoutes = require('./routes/news');
 app.use('/api/news', newsRoutes);
 
+// Handle 404 - Page not found
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+});
+
 // Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
