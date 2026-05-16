@@ -548,3 +548,57 @@ footer {
     padding: 20px;
   }
 }
+/* ===== LIVE STATS CARD ===== */
+.live-stats-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.live-stat {
+  text-align: center;
+  flex: 1;
+}
+.live-stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.live-stat-label {
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.live-stat-divider {
+  width: 1px;
+  height: 50px;
+  background: #f0f0f0;
+}
+.fake-color {
+  color: #d00000 !important;
+}
+.real-color {
+  color: #008000 !important;
+}
+
+/* Mobile responsive for stats */
+@media (max-width: 600px) {
+  .live-stats-card {
+    padding: 16px;
+  }
+  .live-stat-number {
+    font-size: 1.8rem;
+  }
+  .live-stat-label {
+    font-size: 0.75rem;
+  }
+}

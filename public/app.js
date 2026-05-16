@@ -10,7 +10,6 @@ function setupMicrophone() {
     recognition.interimResults = true;
     recognition.lang = 'en-IN';
 
-    // When speech detected
     recognition.onresult = function(event) {
       let transcript = '';
       for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -20,54 +19,47 @@ function setupMicrophone() {
       document.getElementById('charCount').textContent = transcript.length;
     };
 
-    // When speech ends
     recognition.onend = function() {
       isListening = false;
       updateMicButton(false);
     };
 
-    // On error
     recognition.onerror = function(event) {
       isListening = false;
       updateMicButton(false);
       if (event.error === 'not-allowed') {
-        alert('Microphone permission denied. Please allow microphone access in browser settings.');
+        alert('Microphone permission denied. Please allow microphone access.');
       }
     };
-
   } else {
-    // Browser does not support
     const micBtn = document.getElementById('micBtn');
-    micBtn.style.display = 'none';
+    if (micBtn) micBtn.style.display = 'none';
   }
 }
 
-// Toggle microphone on/off
+// Toggle microphone
 function toggleMicrophone() {
   if (!recognition) {
-    alert('Your browser does not support voice input. Please use Chrome or Edge.');
+    alert('Voice input not supported. Please use Chrome or Edge.');
     return;
   }
-
   if (isListening) {
-    // Stop listening
     recognition.stop();
     isListening = false;
     updateMicButton(false);
   } else {
-    // Start listening
     recognition.start();
     isListening = true;
     updateMicButton(true);
   }
 }
 
-// Update mic button appearance
+// Update mic button
 function updateMicButton(listening) {
   const micBtn = document.getElementById('micBtn');
-  const voiceStatus = document.getElementById('voiceStatus');
   const voiceDot = document.getElementById('voiceDot');
   const voiceStatusText = document.getElementById('voiceStatusText');
+  const voiceStatus = document.getElementById('voiceStatus');
 
   if (listening) {
     micBtn.textContent = '⏹️ Stop';
@@ -88,9 +80,10 @@ function updateMicButton(listening) {
 window.onload = function() {
   setupMicrophone();
   loadHistory();
+  loadStats();
 };
 
-// Count characters as user types
+// Count characters
 document.getElementById('newsInput').addEventListener('input', function() {
   const count = this.value.length;
   document.getElementById('charCount').textContent = count;
@@ -100,22 +93,24 @@ document.getElementById('newsInput').addEventListener('input', function() {
 async function checkNews() {
   const newsText = document.getElementById('newsInput').value.trim();
 
-  // Stop microphone if listening
   if (isListening) {
     recognition.stop();
     isListening = false;
     updateMicButton(false);
   }
 
-  // Check if empty
   if (newsText === '') {
-    alert('Please enter some news text first!');
+    showAlert('Please enter some news text first!');
     return;
   }
 
-  // Check minimum length
   if (newsText.length < 20) {
-    alert('Please enter at least 20 characters for better accuracy!');
+    showAlert('Please enter at least 20 characters for better accuracy!');
+    return;
+  }
+
+  if (newsText.length > 2000) {
+    showAlert('News text is too long. Please keep it under 2000 characters.');
     return;
   }
 
@@ -136,22 +131,39 @@ async function checkNews() {
     if (data.success) {
       showResult(data.data);
       loadHistory();
+      loadStats();
     } else {
-      alert('Error: ' + data.message);
+      showAlert('Error: ' + data.message);
       enableButton();
     }
 
   } catch (error) {
     hideLoading();
-    alert('Something went wrong. Please try again.');
+    showAlert('Connection error. Make sure server is running.');
     enableButton();
   }
 }
 
-// Show result → go to result page
+// Show result
 function showResult(data) {
   localStorage.setItem('newsResult', JSON.stringify(data));
   window.location.href = '/result.html';
+}
+
+// Load stats
+async function loadStats() {
+  try {
+    const response = await fetch('/api/news/stats');
+    const data = await response.json();
+
+    if (data.success) {
+      document.getElementById('totalChecked').textContent = data.data.total;
+      document.getElementById('totalFake').textContent = data.data.fake;
+      document.getElementById('totalReal').textContent = data.data.real;
+    }
+  } catch (error) {
+    console.log('Stats error:', error);
+  }
 }
 
 // Load history
@@ -190,10 +202,24 @@ async function loadHistory() {
   }
 }
 
-// Clear history
-function clearHistory() {
-  const historyList = document.getElementById('historyList');
-  historyList.innerHTML = '<p class="no-history">No history yet</p>';
+// Clear history from database
+async function clearHistory() {
+  if (!confirm('Are you sure you want to clear all history?')) return;
+
+  try {
+    const response = await fetch('/api/news/history', {
+      method: 'DELETE'
+    });
+    const data = await response.json();
+
+    if (data.success) {
+      document.getElementById('historyList').innerHTML =
+        '<p class="no-history">No history yet</p>';
+      loadStats();
+    }
+  } catch (error) {
+    console.log('Clear history error:', error);
+  }
 }
 
 // Clear input
@@ -205,6 +231,11 @@ function clearInput() {
     isListening = false;
     updateMicButton(false);
   }
+}
+
+// Show custom alert
+function showAlert(message) {
+  alert(message);
 }
 
 // Check Again

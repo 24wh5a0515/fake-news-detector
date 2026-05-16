@@ -20,6 +20,22 @@ const checkNews = async (req, res) => {
       });
     }
 
+    // Check minimum length
+    if (newsText.trim().length < 20) {
+      return res.status(400).json({
+        success: false,
+        message: 'News text must be at least 20 characters'
+      });
+    }
+
+    // Check maximum length
+    if (newsText.trim().length > 2000) {
+      return res.status(400).json({
+        success: false,
+        message: 'News text must be less than 2000 characters'
+      });
+    }
+
     // Prompt for AI
     const prompt = `
       You are a fake news detection expert.
@@ -35,7 +51,7 @@ const checkNews = async (req, res) => {
 
     // Call OpenRouter API
     const completion = await client.chat.completions.create({
-      model: 'nvidia/nemotron-3-super-120b-a12b:free',
+      model: 'poolside/laguna-xs.2:free',
       messages: [
         {
           role: 'user',
@@ -75,6 +91,22 @@ const checkNews = async (req, res) => {
 
   } catch (error) {
     console.log('Error:', error.message);
+
+    // Handle specific errors
+    if (error.message.includes('429')) {
+      return res.status(429).json({
+        success: false,
+        message: 'Too many requests. Please wait a moment and try again.'
+      });
+    }
+
+    if (error.message.includes('401')) {
+      return res.status(401).json({
+        success: false,
+        message: 'API key error. Please check configuration.'
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: 'Server error: ' + error.message
@@ -82,15 +114,16 @@ const checkNews = async (req, res) => {
   }
 };
 
-// Get last 5 checked news from MongoDB
+// Get last 10 checked news from MongoDB
 const getHistory = async (req, res) => {
   try {
     const history = await News.find()
       .sort({ checkedAt: -1 })
-      .limit(5);
+      .limit(10);
 
     res.status(200).json({
       success: true,
+      count: history.length,
       data: history
     });
 
@@ -103,4 +136,44 @@ const getHistory = async (req, res) => {
   }
 };
 
-module.exports = { checkNews, getHistory };
+// Delete all history
+const clearHistory = async (req, res) => {
+  try {
+    await News.deleteMany({});
+    res.status(200).json({
+      success: true,
+      message: 'History cleared successfully'
+    });
+  } catch (error) {
+    console.log('Error:', error.message);
+    res.status(500).json({
+      success: false,
+      message: 'Server error'
+    });
+  }
+};
+
+// Get statistics
+const getStats = async (req, res) => {
+  try {
+    const total = await News.countDocuments();
+    const fakeCount = await News.countDocuments({ result: 'FAKE' });
+    const realCount = await News.countDocuments({ result: 'REAL' });
+
+    res.status(200).json({
+      success: true,
+      data: {
+        total,
+        fake: fakeCount,
+        real: realCount
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Server error'
+    });
+  }
+};
+
+module.exports = { checkNews, getHistory, clearHistory, getStats };

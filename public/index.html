@@ -20,25 +20,43 @@
   <!-- Main Container -->
   <main>
 
-    <!-- Stats Bar -->
-    <div class="stats-bar">
-      <div class="stat-item">
-        <span class="stat-icon">🤖</span>
-        <span class="stat-text">Powered by AI</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-icon">⚡</span>
-        <span class="stat-text">Results in seconds</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-icon">🎤</span>
-        <span class="stat-text">Voice Supported</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-icon">🛡️</span>
-        <span class="stat-text">Fight Misinformation</span>
-      </div>
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-icon">🤖</span>
+      <span class="stat-text">Powered by AI</span>
     </div>
+    <div class="stat-item">
+      <span class="stat-icon">⚡</span>
+      <span class="stat-text">Results in seconds</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-icon">🎤</span>
+      <span class="stat-text">Voice Supported</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-icon">🛡️</span>
+      <span class="stat-text">Fight Misinformation</span>
+    </div>
+  </div>
+
+  <!-- Live Stats Card -->
+  <div class="live-stats-card">
+    <div class="live-stat">
+      <span class="live-stat-number" id="totalChecked">0</span>
+      <span class="live-stat-label">Total Checked</span>
+    </div>
+    <div class="live-stat-divider"></div>
+    <div class="live-stat">
+      <span class="live-stat-number fake-color" id="totalFake">0</span>
+      <span class="live-stat-label">Fake Detected</span>
+    </div>
+    <div class="live-stat-divider"></div>
+    <div class="live-stat">
+      <span class="live-stat-number real-color" id="totalReal">0</span>
+      <span class="live-stat-label">Real Verified</span>
+    </div>
+  </div>
 
     <!-- Input Section -->
     <div class="input-card">
